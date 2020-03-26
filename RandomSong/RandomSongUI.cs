@@ -36,11 +36,11 @@ namespace RandomSong
         {
             // get containers/transforms
             var _levelSelectionFlowCoordinator = Resources.FindObjectsOfTypeAll<SoloFreePlayFlowCoordinator>().First();
-            var _levelSelectionNavigationController = _levelSelectionFlowCoordinator.GetPrivateField<LevelSelectionNavigationController>("_levelSelectionNavigationController");
-            var _levelCollectionViewController = _levelSelectionNavigationController.GetPrivateField<LevelCollectionViewController>("_levelCollectionViewController");
+            var _levelSelectionNavigationController = _levelSelectionFlowCoordinator.GetField<LevelSelectionNavigationController, LevelSelectionFlowCoordinator>("_levelSelectionNavigationController");
+            var _levelCollectionViewController = _levelSelectionNavigationController.GetField<LevelCollectionViewController, LevelSelectionNavigationController>("_levelCollectionViewController");
 
-            var _levelCollectionTableView = _levelCollectionViewController.GetPrivateField<LevelCollectionTableView>("_levelCollectionTableView");
-            var _tableView = _levelCollectionTableView.GetPrivateField<TableView>("_tableView");
+            var _levelCollectionTableView = _levelCollectionViewController.GetField<LevelCollectionTableView, LevelCollectionViewController>("_levelCollectionTableView");
+            var _tableView = _levelCollectionTableView.GetField<TableView, LevelCollectionTableView>("_tableView");
 
             RectTransform viewControllersContainer = FindObjectsOfType<RectTransform>().First(x => x.name == "ViewControllers");
 
@@ -49,7 +49,7 @@ namespace RandomSong
             _randomButton.onClick.AddListener(() =>
             {
                 // get beatmaps
-                var beatmaps = _levelCollectionTableView.GetPrivateField<IPreviewBeatmapLevel[]>("_previewBeatmapLevels").ToList();
+                var beatmaps = _levelCollectionTableView.GetField<IPreviewBeatmapLevel[], LevelCollectionTableView>("_previewBeatmapLevels").ToList();
 
                 // get a random song
                 var songToPick = beatmaps.OrderBy(b => Guid.NewGuid()).First();
@@ -58,7 +58,7 @@ namespace RandomSong
                 var randomRow = beatmaps.IndexOf(songToPick);
 
                 // offset row if pack header is showing
-                if (_levelCollectionTableView.GetPrivateField<bool>("_showLevelPackHeader"))
+                if (_levelCollectionTableView.GetField<bool, LevelCollectionTableView>("_showLevelPackHeader"))
                 {
                     randomRow++;
                 }

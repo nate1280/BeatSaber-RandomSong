@@ -39,7 +39,7 @@ namespace RandomSong.Extensions
             var hoverHint = parent.gameObject.AddComponent<HoverHint>();
             hoverHint.text = text;
             var hoverHintController = Resources.FindObjectsOfTypeAll<HoverHintController>().First();
-            hoverHint.SetPrivateField("_hoverHintController", hoverHintController);
+            hoverHint.SetField("_hoverHintController", hoverHintController);
             return hoverHint;
         }
 

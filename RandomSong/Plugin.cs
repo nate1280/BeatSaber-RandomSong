@@ -1,21 +1,23 @@
 ﻿using IPA;
 using IPALogger = IPA.Logging.Logger;
 using BS_Utils.Utilities;
-using UnityEngine.SceneManagement;
 
 namespace RandomSong
 {
-    public class Plugin : IBeatSaberPlugin
+    [Plugin(RuntimeOptions.SingleStartInit)]
+    public class Plugin
     {
-        public static SemVer.Version Version => IPA.Loader.PluginManager.GetPlugin("RandomSong").Metadata.Version;
+        public static SemVer.Version Version => IPA.Loader.PluginManager.GetPlugin("RandomSong").Version;
 
         public static IPALogger Log { get; internal set; }
 
+        [Init]
         public void Init(object thisIsNull, IPALogger log)
         {
             Log = log;
         }
 
+        [OnStart]
         public void OnApplicationStart()
         {
             Sprites.ConvertToSprites();
@@ -32,23 +34,5 @@ namespace RandomSong
             // load main mod
             RandomSongUI.Instance.OnLoad();
         }
-
-        #region Unused IPA Methods
-        public void OnActiveSceneChanged(Scene prevScene, Scene nextScene) { }
-
-        public void OnSceneLoaded(Scene scene, LoadSceneMode arg1) { }
-
-        public void OnSceneUnloaded(Scene scene) { }
-
-        public void OnApplicationQuit() { }
-
-        public void OnLevelWasLoaded(int level) { }
-
-        public void OnLevelWasInitialized(int level) { }
-
-        public void OnUpdate() { }
-
-        public void OnFixedUpdate() { }
-        #endregion
     }
 }
