@@ -2,12 +2,12 @@
     "$schema": "https://raw.githubusercontent.com/nike4613/ModSaber-MetadataFileSchema/master/Schema.json",
     "author": "nate1280",
     "description": "Just pick a random song!",
-    "gameVersion": "1.8.0",
+    "gameVersion": "1.11.0",
     "id": "RandomSong",
     "name": "RandomSong",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "dependsOn": {
-        "BS Utils": "^1.4.3"
+        "BS Utils": "^1.4.11"
     },
     "loadAfter": [],
     "features": []
